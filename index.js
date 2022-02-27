@@ -1,6 +1,6 @@
 const http = require('http');
 const app = require('./app/app')
-const port = process.env.SERVER_PORT || 6060;
+const port = process.env.SERVER_PORT || process.env.PORT || 6060;
 
 if (port === undefined) {
   throw new Error(
