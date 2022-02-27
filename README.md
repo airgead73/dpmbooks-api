@@ -1,2 +1,2 @@
 # DPMBOOKS api
-server for mern application dpmbooks
+server for mern application called dpmbooks
