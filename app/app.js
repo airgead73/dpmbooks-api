@@ -29,7 +29,7 @@ const apiRouter = express.Router();
 app.use(helmet());
 app.use(cors({ origin: clientOrigins }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'views')))
 
 app.use("/api", apiRouter);
 
