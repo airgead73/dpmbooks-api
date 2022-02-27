@@ -4,7 +4,8 @@
   "description": "server for mern application called dpmbooks",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "serve": "nodemon -r dotenv/config index.js"
   },
   "keywords": [
     "mern",
@@ -13,5 +14,15 @@
     "auth0"
   ],
   "author": "dan moneypenny",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "express-jwt": "^6.1.1",
+    "helmet": "^5.0.2",
+    "jwks-rsa": "^2.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
