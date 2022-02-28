@@ -4,7 +4,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const { clientOrigins } = require("./config/env.dev");
 
-const { messagesRouter } = require("./messages/messages.router");
+const { apiRouter } = require("./routes");
 
 /**
  * App Variables
@@ -39,6 +39,8 @@ app.use(function (err, req, res, next) {
   console.log(err);
   res.status(500).send(err.message);
 });
+
+app.use("/api", apiRouter);
 
 /**
  * Server Activation
