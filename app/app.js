@@ -9,7 +9,7 @@ const path = require('path');
 /**
  * internal imports
  */
- //const { apiRouter } = require("./routes");
+ const { apiRouter } = require('./router');
  const { clientOrigins } = require("./env");
  const { connectDB } = require('./config');
  const { errorHandler } = require('./middleware');
@@ -31,10 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'views')))
 
-// app.use("/api", apiRouter);
-// apiRouter.use("/messages", messagesRouter);
-
-// app.use("/api", apiRouter);
+app.use("/api", apiRouter);
 
 /**
  * @description error handling
