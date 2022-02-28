@@ -1,11 +1,23 @@
 const { Router } = require('express');
 const messagesRouter = Router();
-const { checkJwt } = require('../middleware/check-jwt');
+
+/**
+ * middleware
+ */
+const { checkJwt } = require('../middleware');
+
+/**
+ * controllers
+ */
 
 const {
   getPublicMessage,
   getProtectedMessage
-} = require('../controllers/controllers.messages');
+} = require('../controllers');
+
+/**
+ * routes
+ */
 
 messagesRouter.route('/').get(getPublicMessage);
 messagesRouter.route('/protected').get(checkJwt, getProtectedMessage);
