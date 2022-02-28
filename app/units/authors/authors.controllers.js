@@ -80,7 +80,7 @@ exports.update = asyncHandler(async (req, res, next) => {
  * */
 
 exports.remove = asyncHandler(async (req, res, next) => {
-  const author = await Book.findById(req.params.id);
+  const author = await Author.findById(req.params.id);
 
   if(!author) {
     const error = new Error('Author not found.');
