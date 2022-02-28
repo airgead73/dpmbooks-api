@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require('path');
+const { connectDB } = require('./config');
 const cors = require("cors");
 const helmet = require("helmet");
 const { clientOrigins } = require("./config/env.dev");
@@ -10,8 +11,8 @@ const { apiRouter } = require("./routes");
  * App Variables
  */
 
+connectDB();
 const app = express();
-const apiRouter = express.Router();
 
 /**
  *  App Configuration
