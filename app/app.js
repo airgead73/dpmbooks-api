@@ -1,50 +1,55 @@
-const express = require("express");
-const path = require('path');
-const { connectDB } = require('./config');
+/**
+ * external modules
+ */
 const cors = require("cors");
+const express = require("express");
 const helmet = require("helmet");
-const { clientOrigins } = require("./config/env.dev");
-
-const { apiRouter } = require("./routes");
+const path = require('path');
 
 /**
- * App Variables
+ * internal imports
+ */
+ const { apiRouter } = require("./routes");
+ const { clientOrigins } = require("./env");
+ const { connectDB } = require('./config');
+ const { errorHandler } = require('./middleware');
+
+/**
+ * app activation
  */
 
 connectDB();
 const app = express();
 
 /**
- *  App Configuration
+ * middleware
  */
-
-//  app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "https://dpmsandbox.dev");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
 
 app.use(helmet());
 app.use(cors({ origin: clientOrigins }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'views')))
 
 app.use("/api", apiRouter);
-
 apiRouter.use("/messages", messagesRouter);
-
-app.use(function (err, req, res, next) {
-  console.log(err);
-  res.status(500).send(err.message);
-});
 
 app.use("/api", apiRouter);
 
 /**
- * Server Activation
+ * @description error handling
+ */
+
+ app.use(function(req, res, next) {
+  const error = new Error('Path not found');
+  error.status = 404;
+  next(error);
+});
+
+app.use(errorHandler);
+
+/**
+ * @description Server Activation
  */
 
 module.exports = app;
