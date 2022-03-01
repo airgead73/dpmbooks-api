@@ -29,8 +29,14 @@ const Author = require('./author');
  * */
 
 exports.read = asyncHandler(async (req, res) => {
-  const authors = await Author.find();
-  res.status(200).json(authors);
+  console.log(req.query)
+  const authors = await Author.find(req.query);
+  const results = {
+    success: true,
+    count: authors.length,
+    data: authors
+  }
+  res.status(200).json(results);
 });
 
 /**

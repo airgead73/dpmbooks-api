@@ -8,6 +8,10 @@ const authorSchema = mongoose.Schema({
   fname: {
     type: String,
     required: [true, 'Please, add a first name value.']
+  },
+  living: {
+    type: Boolean,
+    default: true
   }  
 }, {
   timestamps: true
